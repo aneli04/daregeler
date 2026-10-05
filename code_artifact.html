@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дәрежелер Әлемі — 7-сынып Математика</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        space: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                        },
+                        brand: {
+                            purple: '#8b5cf6',
+                            pink: '#ec4899',
+                            cyan: '#06b6d4',
+                            yellow: '#f59e0b',
+                            green: '#10b981'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s infinite',
+                        'bounce-short': 'bounce 0.8s infinite',
+                        'float': 'float 4s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-purple {
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+        }
+        .badge-glow {
+            box-shadow: 0 0 15px currentColor;
+        }
+    </style>
+</head>
+<body class="bg-space-900 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-brand-purple selection:text-white">
+
+    <!-- Navbar / Header -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-700/50 px-4 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-purple to-brand-pink flex items-center justify-center text-xl font-bold font-display shadow-lg animate-float">
+                    xⁿ
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold font-display tracking-wide bg-gradient-to-r from-brand-purple via-brand-pink to-brand-cyan bg-clip-text text-transparent">
+                        ДӘРЕЖЕЛЕР ӘЛЕМІ
+                    </h1>
+                    <p class="text-xs text-slate-400">7-сынып Математика Оқу Платформасы</p>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="flex items-center gap-4 bg-space-800/80 px-4 py-2 rounded-2xl border border-slate-700">
+                <div class="flex items-center gap-2" title="Тәжірибе ұпайы">
+                    <i class="fa-solid fa-bolt text-brand-yellow text-lg"></i>
+                    <span id="user-xp" class="font-bold font-display text-amber-400">0 XP</span>
+                </div>
+                <div class="h-4 w-px bg-slate-700"></div>
+                <div class="flex items-center gap-2" title="Оқушы деңгейі">
+                    <i class="fa-solid fa-award text-brand-cyan text-lg"></i>
+                    <span id="user-level" class="font-bold font-display text-cyan-400">1 Деңгей</span>
+                </div>
+                <div class="h-4 w-px bg-slate-700"></div>
+                <div class="flex items-center gap-2" title="Дұрыс жауаптар">
+                    <i class="fa-solid fa-fire text-brand-pink text-lg"></i>
+                    <span id="user-streak" class="font-bold font-display text-pink-400">0 Стрик</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center gap-2 text-sm font-medium">
+                <button onclick="scrollToSection('theory')" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 transition text-slate-300 hover:text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-brand-purple"></i> Теория
+                </button>
+                <button onclick="scrollToSection('visualizer')" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 transition text-slate-300 hover:text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-cubes text-brand-cyan"></i> Өсу Симуляторы
+                </button>
+                <button onclick="scrollToSection('properties')" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 transition text-slate-300 hover:text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-brand-pink"></i> Қасиеттер
+                </button>
+                <button onclick="scrollToSection('games')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink font-semibold hover:opacity-90 transition shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad"></i> Ойын Аймағы
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Section -->
+        <section class="relative rounded-3xl overflow-hidden glass-panel p-8 lg:p-12 border border-brand-purple/30 glow-purple">
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-brand-purple/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-brand-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-brand-purple/20 text-brand-purple border border-brand-purple/40">
+                        🚀 Инновациялық Оқу
+                    </span>
+                    <h2 class="text-3xl lg:text-5xl font-extrabold font-display leading-tight">
+                        Дәрежені <span class="bg-gradient-to-r from-brand-cyan via-brand-pink to-brand-yellow bg-clip-text text-transparent">ойнап отырып</span> меңгер!
+                    </h2>
+                    <p class="text-slate-300 text-base lg:text-lg leading-relaxed">
+                        Математикалық дәреже дегеніміз не? Неге $a^0 = 1$ болады? Қасиеттерді жаттамай-ақ, визуалды тәжірибе және ғарыштық ойын арқылы оп-оңай түсініп ал!
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="scrollToSection('theory')" class="px-6 py-3 rounded-xl bg-brand-purple hover:bg-brand-purple/80 font-bold transition flex items-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-play"></i> Бастау
+                        </button>
+                        <button onclick="scrollToSection('games')" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-brand-pink"></i> Тікелей Ойынға Өту
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Hero Graphic -->
+                <div class="flex justify-center">
+                    <div class="bg-space-800/90 p-6 rounded-2xl border border-slate-700 shadow-2xl w-full max-w-md text-center space-y-4">
+                        <div class="text-slate-400 text-xs uppercase tracking-widest font-semibold">Дәреженің құрылымы</div>
+                        
+                        <div class="flex items-center justify-center gap-1 font-display my-6">
+                            <!-- Base -->
+                            <div class="group relative">
+                                <span class="text-6xl font-bold text-brand-cyan bg-slate-900/60 px-4 py-2 rounded-xl border border-brand-cyan/40 inline-block transition transform hover:scale-105">
+                                    a
+                                </span>
+                                <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-semibold text-brand-cyan whitespace-nowrap">
+                                    Табаны (Base)
+                                </div>
+                            </div>
+                            <!-- Exponent -->
+                            <div class="group relative -mt-8">
+                                <span class="text-3xl font-bold text-brand-pink bg-slate-900/60 px-3 py-1 rounded-lg border border-brand-pink/40 inline-block transition transform hover:scale-110">
+                                    n
+                                </span>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-semibold text-brand-pink whitespace-nowrap">
+                                    Көрсеткіші (Exponent)
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-slate-300 bg-space-900/80 p-3 rounded-xl border border-slate-700/60">
+                            <strong class="text-brand-yellow font-display">Ереже:</strong> <span class="text-brand-cyan font-bold">a</span> санын өзін-өзі <span class="text-brand-pink font-bold">n</span> рет көбейту!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: THEORY BASICS -->
+        <section id="theory" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-brand-purple/20 text-brand-purple border border-brand-purple/40">
+                    <i class="fa-solid fa-book-open text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold font-display">1. Дәреже Мәнін Түсіну</h3>
+                    <p class="text-slate-400 text-sm">Негізгі ұғымдар мен қарапайым мысалдар</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Concept Card 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 hover:border-brand-purple/50 transition">
+                    <div class="w-10 h-10 rounded-lg bg-brand-purple/20 text-brand-purple flex items-center justify-center font-bold text-lg mb-4">
+                        1
+                    </div>
+                    <h4 class="text-lg font-bold font-display text-white mb-2">Қайталама Көбейту</h4>
+                    <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                        Көбейту — қосудың қысқартылған түрі болса, **дәреже** — бірдей сандарды көбейтудің қысқартылған жазылуы.
+                    </p>
+                    <div class="bg-space-900 p-3 rounded-xl text-center text-sm font-mono text-brand-cyan border border-slate-800">
+                        2<sup>4</sup> = 2 × 2 × 2 × 2 = 16
+                    </div>
+                </div>
+
+                <!-- Concept Card 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 hover:border-brand-pink/50 transition">
+                    <div class="w-10 h-10 rounded-lg bg-brand-pink/20 text-brand-pink flex items-center justify-center font-bold text-lg mb-4">
+                        2
+                    </div>
+                    <h4 class="text-lg font-bold font-display text-white mb-2">Таңба Ережелері</h4>
+                    <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                        Теріс санның **жұп** дәрежесі — оң, ал **тақ** дәрежесі — теріс сан болады!
+                    </p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="bg-space-900 p-2 rounded-lg text-emerald-400 border border-slate-800">
+                            (-3)<sup>2</sup> = (-3) × (-3) = +9 (Жұп)
+                        </div>
+                        <div class="bg-space-900 p-2 rounded-lg text-rose-400 border border-slate-800">
+                            (-3)<sup>3</sup> = (-3) × (-3) × (-3) = -27 (Тақ)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept Card 3 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/80 hover:border-brand-cyan/50 transition">
+                    <div class="w-10 h-10 rounded-lg bg-brand-cyan/20 text-brand-cyan flex items-center justify-center font-bold text-lg mb-4">
+                        3
+                    </div>
+                    <h4 class="text-lg font-bold font-display text-white mb-2">Нөлдік & 1-ші Дәреже</h4>
+                    <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                        Кез келген нөлге тең емес санның **0-дәрежесі 1-ге тең**, ал 1-дәрежесі санның өзіне тең.
+                    </p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="bg-space-900 p-2 rounded-lg text-amber-300 border border-slate-800">
+                            5<sup>0</sup> = 1  |  100<sup>0</sup> = 1
+                        </div>
+                        <div class="bg-space-900 p-2 rounded-lg text-cyan-300 border border-slate-800">
+                            7<sup>1</sup> = 7  |  x<sup>1</sup> = x
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: INTERACTIVE VISUALIZER -->
+        <section id="visualizer" class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-700 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 rounded-xl bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/40">
+                        <i class="fa-solid fa-chart-line text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold font-display">2. «Дәрежелік Өсу» Визуалды Симуляторы</h3>
+                        <p class="text-slate-400 text-sm">Бактериялардың немесе кубтардың дәреже бойынша геометриялық өсуін бақылаңыз</p>
+                    </div>
+                </div>
+
+                <!-- Simulator Controls -->
+                <div class="flex items-center gap-4 bg-space-900 p-3 rounded-2xl border border-slate-700">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Табаны (a):</label>
+                        <select id="sim-base" onchange="updateSimulator()" class="bg-space-800 text-brand-cyan font-bold px-3 py-1 rounded-lg border border-slate-600 focus:outline-none">
+                            <option value="2">2 (Екі еселену)</option>
+                            <option value="3">3 (Үш еселену)</option>
+                            <option value="4">4 (Төрт еселену)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Көрсеткіш (n): <span id="sim-exp-val" class="text-brand-pink font-bold">3</span></label>
+                        <input id="sim-exp" type="range" min="0" max="6" value="3" oninput="updateSimulator()" class="accent-brand-pink cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Display Area -->
+            <div class="grid md:grid-cols-3 gap-6 items-center">
+                <div class="space-y-3 bg-space-900/60 p-5 rounded-2xl border border-slate-800">
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Өрнектің Жайылуы</div>
+                    <div id="sim-expansion" class="text-lg font-mono text-brand-yellow break-all">
+                        2 × 2 × 2
+                    </div>
+                    <hr class="border-slate-800">
+                    <div class="text-xs text-slate-400 uppercase font-semibold">Соңғы Нәтиже</div>
+                    <div id="sim-result" class="text-3xl font-extrabold font-display text-emerald-400">
+                        8
+                    </div>
+                    <p class="text-xs text-slate-400">
+                        Бұл дегеніміз <span id="sim-explain-text">2 санын өзіне 3 рет көбейттік</span>.
+                    </p>
+                </div>
+
+                <!-- Graphical Blocks Representation -->
+                <div class="md:col-span-2 bg-space-900/80 p-6 rounded-2xl border border-slate-800 min-h-[220px] flex flex-col justify-center items-center">
+                    <div class="text-xs text-slate-400 mb-3">Визуалды Объектілер Саны (<span id="sim-count-label">8</span> шар):</div>
+                    <div id="sim-grid" class="flex flex-wrap gap-2 justify-center max-h-[180px] overflow-y-auto p-2">
+                        <!-- Dynamic generated elements -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXPONENT PROPERTIES EXPLORER -->
+        <section id="properties" class="space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-brand-pink/20 text-brand-pink border border-brand-pink/40">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold font-display">3. Дәреженің 7 Негізгі Қасиеті</h3>
+                    <p class="text-slate-400 text-sm">Осы ережелерді меңгерсеңіз, кез келген күрделі есеп оңай шешіледі!</p>
+                </div>
+            </div>
+
+            <!-- Property Tabs Switcher -->
+            <div class="flex flex-wrap gap-2 border-b border-slate-700 pb-3" id="property-tabs">
+                <button onclick="selectProperty(0)" class="prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-brand-purple text-white" data-index="0">
+                    1. Көбейту (a<sup>m</sup> · a<sup>n</sup>)
+                </button>
+                <button onclick="selectProperty(1)" class="prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-space-800 hover:bg-slate-700 text-slate-300" data-index="1">
+                    2. Бөлу (a<sup>m</sup> : a<sup>n</sup>)
+                </button>
+                <button onclick="selectProperty(2)" class="prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-space-800 hover:bg-slate-700 text-slate-300" data-index="2">
+                    3. Дәрежені Дәрежелеу ((a<sup>m</sup>)<sup>n</sup>)
+                </button>
+                <button onclick="selectProperty(3)" class="prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-space-800 hover:bg-slate-700 text-slate-300" data-index="3">
+                    4. Көбейтіндінің Дәрежесі ((a·b)<sup>n</sup>)
+                </button>
+                <button onclick="selectProperty(4)" class="prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-space-800 hover:bg-slate-700 text-slate-300" data-index="4">
+                    5. Бөлшектің Дәрежесі ((a/b)<sup>n</sup>)
+                </button>
+                <button onclick="selectProperty(5)" class="prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-space-800 hover:bg-slate-700 text-slate-300" data-index="5">
+                    6. Нөлдік Дәреже (a<sup>0</sup>)
+                </button>
+            </div>
+
+            <!-- Active Property Detail Box -->
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-700 grid md:grid-cols-2 gap-8 items-center" id="property-display-card">
+                <!-- Left side: Formula & Rule -->
+                <div class="space-y-4">
+                    <span id="prop-badge" class="px-3 py-1 text-xs font-bold rounded-full bg-brand-purple/20 text-brand-purple border border-brand-purple/40">
+                        1-Қасиет: Негіздері бірдей дәрежелерді көбейту
+                    </span>
+                    <div id="prop-formula" class="text-3xl lg:text-4xl font-extrabold font-display text-brand-cyan tracking-wider">
+                        a<sup>m</sup> · a<sup>n</sup> = a<sup>m + n</sup>
+                    </div>
+                    <p id="prop-rule" class="text-slate-300 text-base leading-relaxed">
+                        Негіздері бірдей дәрежелерді көбейткенде: **табаны өзгеріссіз қалады**, ал **көрсеткіштері қосылады**.
+                    </p>
+                    <div id="prop-tip" class="bg-space-900/80 p-4 rounded-xl border border-slate-800 text-sm text-brand-yellow">
+                        💡 **Есте сақта:** Көбейтіп тұрғанда көрсеткіштерді көбейтпеңіз, тек ҚОСЫҢЫЗ!
+                    </div>
+                </div>
+
+                <!-- Right side: Live interactive tester for this property -->
+                <div class="bg-space-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400">Интерактивті Тексеру</h4>
+                    
+                    <div id="prop-inputs" class="flex flex-wrap items-center gap-3 text-lg font-mono">
+                        <!-- Dynamic inputs will be inserted here by JS -->
+                    </div>
+
+                    <div class="p-4 bg-space-800 rounded-xl border border-slate-700/80 space-y-2">
+                        <div class="text-xs text-slate-400">Қадаммен Түсіндірме:</div>
+                        <div id="prop-step-by-step" class="text-sm font-mono text-emerald-400">
+                            x³ · x⁴ = x³⁺⁴ = x⁷
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GAMIFIED LEARNING HUB -->
+        <section id="games" class="space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink text-white">
+                        <i class="fa-solid fa-gamepad text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold font-display">4. «Дәреже Галактикасы» Ойын Аймағы</h3>
+                        <p class="text-slate-400 text-sm">Біліміңді ойын арқылы тексеріп, XP жинап, жаңа дәрежелерді аш!</p>
+                    </div>
+                </div>
+
+                <!-- Mini Game Selection Tabs -->
+                <div class="flex bg-space-800 p-1 rounded-2xl border border-slate-700">
+                    <button onclick="switchGameMode('quiz')" id="tab-game-quiz" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-purple text-white">
+                        🚀 Ғарыш Шайқасы
+                    </button>
+                    <button onclick="switchGameMode('match')" id="tab-game-match" class="px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
+                        🧩 Сәйкестендіру
+                    </button>
+                    <button onclick="switchGameMode('detective')" id="tab-game-detective" class="px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white">
+                        🔍 Қатесін ТАП
+                    </button>
+                </div>
+            </div>
+
+            <!-- GAME MODE 1: SPACE QUIZ BATTLE -->
+            <div id="game-quiz-container" class="glass-panel p-6 lg:p-8 rounded-3xl border border-brand-purple/40 space-y-6 relative overflow-hidden">
+                <div class="flex justify-between items-center bg-space-900/80 p-4 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs uppercase font-bold text-slate-400">Кезең:</span>
+                        <span id="quiz-question-num" class="font-display font-bold text-brand-cyan text-lg">1 / 5</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs uppercase font-bold text-slate-400">Өмір:</span>
+                        <div id="quiz-lives" class="flex gap-1 text-rose-500">
+                            <i class="fa-solid fa-heart"></i>
+                            <i class="fa-solid fa-heart"></i>
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs uppercase font-bold text-slate-400">Ұпай:</span>
+                        <span id="quiz-score" class="font-display font-bold text-brand-yellow text-lg">0</span>
+                    </div>
+                </div>
+
+                <!-- Asteroid Quiz Area -->
+                <div class="text-center space-y-6 py-6">
+                    <div class="inline-block relative">
+                        <div id="enemy-asteroid" class="w-28 h-28 mx-auto bg-gradient-to-tr from-amber-700 to-amber-900 rounded-full flex items-center justify-center border-4 border-amber-600 shadow-xl animate-bounce-short">
+                            <i class="fa-solid fa-meteor text-4xl text-amber-300"></i>
+                        </div>
+                        <div class="mt-4 text-xs font-semibold text-slate-400 uppercase">Жау Астероидындағы Өрнек:</div>
+                        <div id="quiz-expression" class="text-3xl lg:text-4xl font-extrabold font-display text-white mt-1 bg-space-900 px-6 py-3 rounded-2xl border border-brand-purple/50 inline-block shadow-inner">
+                            2³ · 2² = ?
+                        </div>
+                    </div>
+
+                    <!-- Answer Options Grid -->
+                    <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                        <!-- Options generated dynamically -->
+                    </div>
+
+                    <!-- Feedback Banner -->
+                    <div id="quiz-feedback" class="hidden p-4 rounded-2xl font-bold text-sm text-center"></div>
+                </div>
+            </div>
+
+            <!-- GAME MODE 2: MATCHING CARDS -->
+            <div id="game-match-container" class="hidden glass-panel p-6 lg:p-8 rounded-3xl border border-brand-cyan/40 space-y-6">
+                <div class="text-center space-y-2">
+                    <h4 class="text-xl font-bold font-display text-brand-cyan">Тең Өрнектерді Тап!</h4>
+                    <p class="text-xs text-slate-300">Сол жақтағы дәрежелік өрнекті оның дұрыс мәнімен немесе ықшамдалған түрімен сәйкестендіріңіз.</p>
+                </div>
+
+                <div id="match-cards-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                    <!-- Cards dynamically rendered -->
+                </div>
+
+                <div class="text-center pt-2">
+                    <button onclick="initMatchGame()" class="px-4 py-2 bg-space-800 hover:bg-slate-700 rounded-xl text-xs font-bold text-slate-300 border border-slate-600">
+                        🔄 Жаңадан бастау
+                    </button>
+                </div>
+            </div>
+
+            <!-- GAME MODE 3: MATH DETECTIVE (MISTAKE FINDER) -->
+            <div id="game-detective-container" class="hidden glass-panel p-6 lg:p-8 rounded-3xl border border-brand-pink/40 space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="px-3 py-1 text-xs font-bold rounded-full bg-brand-pink/20 text-brand-pink border border-brand-pink/40">
+                        🔍 Математикалық Детектив
+                    </span>
+                    <h4 class="text-xl font-bold font-display text-white">Теңдікте қате бар ма, жоқ па?</h4>
+                    <p class="text-xs text-slate-300">Берілген өрнекті мұқият тексеріп, «ДҰРЫС» немесе «ҚАТЕ» түймесін басыңыз.</p>
+                </div>
+
+                <div class="max-w-xl mx-auto bg-space-900 p-8 rounded-3xl border border-slate-800 text-center space-y-6">
+                    <div id="detective-expr" class="text-3xl font-extrabold font-mono text-brand-yellow">
+                        (x³)⁴ = x⁷
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button onclick="checkDetectiveAnswer(false)" class="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> Дұрыс Есептелген
+                        </button>
+                        <button onclick="checkDetectiveAnswer(true)" class="px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-times-circle"></i> Қате Түптелген!
+                        </button>
+                    </div>
+
+                    <div id="detective-feedback" class="hidden p-4 rounded-xl text-sm font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: STEP-BY-STEP SOLVER CALCULATOR & ACHIEVEMENTS -->
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Step-by-Step Trainer / Calc -->
+            <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-700 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-lg bg-brand-yellow/20 text-brand-yellow border border-brand-yellow/40">
+                        <i class="fa-solid fa-calculator text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold font-display">Интерактивті Дәреже Есептегіш</h4>
+                        <p class="text-xs text-slate-400">Кез келген санды дәрежеге шығарып, қадамын көріңіз</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Табаны (a):</label>
+                        <input id="calc-base" type="number" value="3" class="w-full bg-space-900 border border-slate-700 rounded-xl px-4 py-2 font-mono text-brand-cyan focus:outline-none focus:border-brand-purple">
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">Көрсеткіш (n):</label>
+                        <input id="calc-exp" type="number" value="4" max="15" min="0" class="w-full bg-space-900 border border-slate-700 rounded-xl px-4 py-2 font-mono text-brand-pink focus:outline-none focus:border-brand-purple">
+                    </div>
+                </div>
+
+                <button onclick="calculatePowerStep()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan font-bold transition hover:opacity-90">
+                    🧮 Шешу Ережесін Көру
+                </button>
+
+                <div id="calc-output" class="bg-space-900 p-4 rounded-2xl border border-slate-800 space-y-2">
+                    <div class="text-xs text-slate-400">Шешу жолы:</div>
+                    <div id="calc-steps" class="font-mono text-sm text-brand-yellow">
+                        3⁴ = 3 × 3 × 3 × 3 = 81
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements & Badges Panel -->
+            <div class="glass-panel p-6 rounded-3xl border border-slate-700 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-lg bg-brand-green/20 text-brand-green border border-brand-green/40">
+                        <i class="fa-solid fa-trophy text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold font-display">Жетістіктер</h4>
+                        <p class="text-xs text-slate-400">Медальдарды жинаңыз</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 p-3 bg-space-900/80 rounded-2xl border border-slate-800 opacity-60" id="badge-1">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg">
+                            🥇
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Дәреже Дебютанты</div>
+                            <div class="text-xs text-slate-400">Алғашқы 3 тестке дұрыс жауап бер</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 p-3 bg-space-900/80 rounded-2xl border border-slate-800 opacity-60" id="badge-2">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
+                            👑
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Қасиеттер Шебері</div>
+                            <div class="text-xs text-slate-400">Барлық қасиеттерді зерттеу</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 p-3 bg-space-900/80 rounded-2xl border border-slate-800 opacity-60" id="badge-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">
+                            🚀
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Ғарыш Академигі</div>
+                            <div class="text-xs text-slate-400">100 XP жинау</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 border-t border-slate-800 bg-space-900/90 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                © 2026 «Дәрежелер Әлемі» — 7-сынып оқушыларына арналған интерактивті оқу құралы.
+            </div>
+            <div class="flex gap-4">
+                <span class="text-slate-400">Математика • Алгебра</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global User Progress State
+        let userXP = 0;
+        let userLevel = 1;
+        let userStreak = 0;
+        let badgesUnlocked = [false, false, false];
+
+        // Sound Effects generator using Web Audio API (No external MP3 files required!)
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.2); // A5
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } else if (type === 'wrong') {
+                    osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+                    osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.2); // A2
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } else if (type === 'level') {
+                    osc.frequency.setValueAtTime(440, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.4);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.45);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.45);
+                }
+            } catch (e) {
+                console.log('Audio disabled or not supported');
+            }
+        }
+
+        // Add XP and Update UI Level
+        function addXP(amount) {
+            userXP += amount;
+            document.getElementById('user-xp').innerText = `${userXP} XP`;
+
+            // Calculate Level
+            const newLevel = Math.floor(userXP / 50) + 1;
+            if (newLevel > userLevel) {
+                userLevel = newLevel;
+                document.getElementById('user-level').innerText = `${userLevel} Деңгей`;
+                playSound('level');
+            }
+
+            // Check Badges
+            if (userStreak >= 3 && !badgesUnlocked[0]) unlockBadge(0);
+            if (userXP >= 100 && !badgesUnlocked[2]) unlockBadge(2);
+        }
+
+        function unlockBadge(index) {
+            badgesUnlocked[index] = true;
+            const badgeEl = document.getElementById(`badge-${index + 1}`);
+            if (badgeEl) {
+                badgeEl.classList.remove('opacity-60');
+                badgeEl.classList.add('border-brand-purple', 'badge-glow');
+            }
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Simulator Functions
+        function updateSimulator() {
+            const base = parseInt(document.getElementById('sim-base').value);
+            const exp = parseInt(document.getElementById('sim-exp').value);
+            document.getElementById('sim-exp-val').innerText = exp;
+
+            let expansionStr = "";
+            let resultVal = Math.pow(base, exp);
+
+            if (exp === 0) {
+                expansionStr = "1 (Кез келген санның 0-дәрежесі)";
+            } else {
+                const arr = Array(exp).fill(base);
+                expansionStr = arr.join(" × ");
+            }
+
+            document.getElementById('sim-expansion').innerText = expansionStr;
+            document.getElementById('sim-result').innerText = resultVal;
+            document.getElementById('sim-explain-text').innerText = exp === 0 ? "нөлдік дәреженің анықтамасы бойынша 1" : `${base} санын өзіне ${exp} рет көбейттік`;
+            document.getElementById('sim-count-label').innerText = resultVal;
+
+            // Render visual dots/spheres (limit to max 128 visual items for UI responsiveness)
+            const grid = document.getElementById('sim-grid');
+            grid.innerHTML = "";
+            const displayCount = Math.min(resultVal, 128);
+
+            for (let i = 0; i < displayCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = "w-6 h-6 rounded-full bg-gradient-to-tr from-brand-cyan to-brand-purple shadow flex items-center justify-center text-[10px] font-bold text-white transition transform hover:scale-125";
+                dot.innerText = i + 1;
+                grid.appendChild(dot);
+            }
+
+            if (resultVal > 128) {
+                const extra = document.createElement('div');
+                extra.className = "text-xs text-brand-yellow font-bold self-center px-2";
+                extra.innerText = `+ тағы ${resultVal - 128} шар...`;
+                grid.appendChild(extra);
+            }
+        }
+
+        // Property Explorer Data
+        const propertiesData = [
+            {
+                title: "1-Қасиет: Негіздері бірдей дәрежелерді көбейту",
+                formula: "a<sup>m</sup> · a<sup>n</sup> = a<sup>m + n</sup>",
+                rule: "Негіздері бірдей дәрежелерді көбейткенде: **табаны өзгеріссіз қалады**, ал **көрсеткіштері қосылады**.",
+                tip: "💡 **Мысал:** 2³ · 2⁴ = 2³⁺⁴ = 2⁷ = 128",
+                inputs: [
+                    { label: "a", id: "p0-a", val: 2 },
+                    { label: "m", id: "p0-m", val: 3 },
+                    { label: "n", id: "p0-n", val: 4 }
+                ],
+                calc: (a, m, n) => {
+                    const resExp = m + n;
+                    const val = Math.pow(a, resExp);
+                    return `${a}<sup>${m}</sup> · ${a}<sup>${n}</sup> = ${a}<sup>${m}+${n}</sup> = ${a}<sup>${resExp}</sup> = ${val}`;
+                }
+            },
+            {
+                title: "2-Қасиет: Негіздері бірдей дәрежелерді бөлу",
+                formula: "a<sup>m</sup> : a<sup>n</sup> = a<sup>m - n</sup>",
+                rule: "Негіздері бірдей дәрежелерді бөлгенде: **табаны өзгеріссіз қалады**, ал бөлінгіштің көрсеткішінен бөлгіштің көрсеткіші **азайтылады**.",
+                tip: "💡 **Ескерту:** a ≠ 0 болуы шарт!",
+                inputs: [
+                    { label: "a", id: "p1-a", val: 3 },
+                    { label: "m", id: "p1-m", val: 5 },
+                    { label: "n", id: "p1-n", val: 2 }
+                ],
+                calc: (a, m, n) => {
+                    const resExp = m - n;
+                    const val = Math.pow(a, resExp);
+                    return `${a}<sup>${m}</sup> : ${a}<sup>${n}</sup> = ${a}<sup>${m}-${n}</sup> = ${a}<sup>${resExp}</sup> = ${val}`;
+                }
+            },
+            {
+                title: "3-Қасиет: Дәрежені дәрежелеу",
+                formula: "(a<sup>m</sup>)<sup>n</sup> = a<sup>m · n</sup>",
+                rule: "Дәрежені дәрежеге шығарғанда: **табаны өзгеріссіз қалады**, ал **көрсеткіштер өзара көбейтіледі**.",
+                tip: "💡 **Мысал:** (x²)³ = x²·³ = x⁶",
+                inputs: [
+                    { label: "a", id: "p2-a", val: 2 },
+                    { label: "m", id: "p2-m", val: 2 },
+                    { label: "n", id: "p2-n", val: 3 }
+                ],
+                calc: (a, m, n) => {
+                    const resExp = m * n;
+                    const val = Math.pow(a, resExp);
+                    return `(${a}<sup>${m}</sup>)<sup>${n}</sup> = ${a}<sup>${m}·${n}</sup> = ${a}<sup>${resExp}</sup> = ${val}`;
+                }
+            },
+            {
+                title: "4-Қасиет: Көбейтіндінің дәрежесі",
+                formula: "(a · b)<sup>n</sup> = a<sup>n</sup> · b<sup>n</sup>",
+                rule: "Көбейтіндіні дәрежеге шығару үшін: **әрбір көбейткішті** осы дәрежеге шығарып, нәтижелерін көбейтеді.",
+                tip: "💡 **Мысал:** (2 · 3)³ = 2³ · 3³ = 8 · 27 = 216",
+                inputs: [
+                    { label: "a", id: "p3-a", val: 2 },
+                    { label: "b", id: "p3-b", val: 3 },
+                    { label: "n", id: "p3-n", val: 3 }
+                ],
+                calc: (a, b, n) => {
+                    const valA = Math.pow(a, n);
+                    const valB = Math.pow(b, n);
+                    return `(${a} · ${b})<sup>${n}</sup> = ${a}<sup>${n}</sup> · ${b}<sup>${n}</sup> = ${valA} · ${valB} = ${valA * valB}`;
+                }
+            },
+            {
+                title: "5-Қасиет: Бөлшектің дәрежесі",
+                formula: "(a / b)<sup>n</sup> = a<sup>n</sup> / b<sup>n</sup>",
+                rule: "Бөлшекті дәрежеге шығару үшін: **алымын да, бөлімін де** осы дәрежеге шығарамыз.",
+                tip: "💡 **Ескерту:** b ≠ 0 болуы тиіс.",
+                inputs: [
+                    { label: "a", id: "p4-a", val: 4 },
+                    { label: "b", id: "p4-b", val: 2 },
+                    { label: "n", id: "p4-n", val: 3 }
+                ],
+                calc: (a, b, n) => {
+                    const valA = Math.pow(a, n);
+                    const valB = Math.pow(b, n);
+                    return `(${a} / ${b})<sup>${n}</sup> = ${a}<sup>${n}</sup> / ${b}<sup>${n}</sup> = ${valA} / ${valB} = ${valA / valB}`;
+                }
+            },
+            {
+                title: "6-Қасиет: Нөлдік дәреже",
+                formula: "a<sup>0</sup> = 1  (a ≠ 0)",
+                rule: "Нөлге тең емес кез келген санның **нөлдік дәрежесі 1-ге тең**.",
+                tip: "💡 **Дәлелдеу:** a³ : a³ = a³⁻³ = a⁰ = 1",
+                inputs: [
+                    { label: "a", id: "p5-a", val: 7 }
+                ],
+                calc: (a) => {
+                    return `${a}<sup>0</sup> = 1`;
+                }
+            }
+        ];
+
+        let activePropIndex = 0;
+
+        function selectProperty(index) {
+            activePropIndex = index;
+
+            // Update Tab UI
+            const tabs = document.querySelectorAll('.prop-tab');
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.className = "prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-brand-purple text-white";
+                } else {
+                    tab.className = "prop-tab px-4 py-2 rounded-xl text-sm font-semibold transition bg-space-800 hover:bg-slate-700 text-slate-300";
+                }
+            });
+
+            const data = propertiesData[index];
+            document.getElementById('prop-badge').innerText = data.title;
+            document.getElementById('prop-formula').innerHTML = data.formula;
+            document.getElementById('prop-rule').innerHTML = data.rule;
+            document.getElementById('prop-tip').innerHTML = data.tip;
+
+            // Render Inputs
+            const inputsContainer = document.getElementById('prop-inputs');
+            inputsContainer.innerHTML = "";
+
+            data.inputs.forEach(inputDef => {
+                const wrapper = document.createElement('div');
+                wrapper.className = "flex items-center gap-2 bg-space-800 px-3 py-1.5 rounded-xl border border-slate-700";
+                wrapper.innerHTML = `
+                    <span class="text-xs text-slate-400 uppercase">${inputDef.label}:</span>
+                    <input id="${inputDef.id}" type="number" value="${inputDef.val}" min="1" max="10" 
+                           onchange="recalcProperty()" class="w-12 bg-space-900 font-bold text-center text-brand-cyan rounded focus:outline-none">
+                `;
+                inputsContainer.appendChild(wrapper);
+            });
+
+            recalcProperty();
+            
+            if (!badgesUnlocked[1]) unlockBadge(1);
+        }
+
+        function recalcProperty() {
+            const data = propertiesData[activePropIndex];
+            const vals = data.inputs.map(inp => parseInt(document.getElementById(inp.id)?.value || inp.val));
+            const stepStr = data.calc(...vals);
+            document.getElementById('prop-step-by-step').innerHTML = stepStr;
+        }
+
+        // Quiz Game State
+        const quizQuestions = [
+            { expr: "2³ · 2² = ?", opts: ["2⁵ (32)", "2⁶ (64)", "4⁵", "2¹"], correct: 0, exp: "Негіздері бірдей болғандықтан көрсеткіштер қосылады: 3 + 2 = 5." },
+            { expr: "x⁸ : x³ = ?", opts: ["x¹¹", "x⁵", "x²", "x²⁴"], correct: 1, exp: "Бөлгенде көрсеткіштер азайтылады: 8 - 3 = 5." },
+            { expr: "(3²)³ = ?", opts: ["3⁵", "3⁶ (729)", "9³", "3 font"], correct: 1, exp: "Дәрежені дәрежелегенде көрсеткіштер көбейтіледі: 2 · 3 = 6." },
+            { expr: "(-5)⁰ = ?", opts: ["-5", "0", "1", "5"], correct: 2, exp: "Кез келген нөлге тең емес санның 0-дәрежесі 1-ге тең!" },
+            { expr: "(-2)³ = ?", opts: ["8", "-8", "-6", "6"], correct: 1, exp: "Теріс санның тақ дәрежесі — теріс сан! (-2)·(-2)·(-2) = -8." }
+        ];
+
+        let quizCurrentIndex = 0;
+        let quizScore = 0;
+        let quizLives = 3;
+
+        function loadQuizQuestion() {
+            if (quizCurrentIndex >= quizQuestions.length) {
+                // Game Finished Win
+                document.getElementById('quiz-expression').innerText = "🎉 БАРЛЫҚ АСТЕРОИДТАР ЖОЙЫЛДЫ!";
+                document.getElementById('quiz-options').innerHTML = `
+                    <div class="col-span-2 text-center p-4 bg-emerald-900/40 rounded-2xl border border-emerald-500 text-emerald-300">
+                        Ғажап! Сіз Галактиканы дәреже есептері арқылы құтқардыңыз! <br><strong>+50 XP жинадыңыз!</strong>
+                    </div>
+                `;
+                addXP(50);
+                return;
+            }
+
+            const q = quizQuestions[quizCurrentIndex];
+            document.getElementById('quiz-question-num').innerText = `${quizCurrentIndex + 1} / ${quizQuestions.length}`;
+            document.getElementById('quiz-expression').innerText = q.expr;
+            document.getElementById('quiz-feedback').className = "hidden";
+
+            const optionsGrid = document.getElementById('quiz-options');
+            optionsGrid.innerHTML = "";
+
+            q.opts.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "p-4 rounded-2xl bg-space-800 hover:bg-brand-purple/40 border border-slate-700 hover:border-brand-purple font-bold text-base transition text-left flex items-center justify-between";
+                btn.innerHTML = `<span>${optText}</span> <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>`;
+                btn.onclick = () => answerQuiz(idx);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function answerQuiz(chosenIdx) {
+            const q = quizQuestions[quizCurrentIndex];
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+
+            if (chosenIdx === q.correct) {
+                playSound('correct');
+                quizScore += 20;
+                userStreak++;
+                document.getElementById('quiz-score').innerText = quizScore;
+                document.getElementById('user-streak').innerText = `${userStreak} Стрик`;
+                addXP(15);
+
+                feedback.className = "p-4 rounded-2xl font-bold text-sm text-center bg-emerald-900/60 border border-emerald-500 text-emerald-300";
+                feedback.innerText = `Дұрыс! 🎯 ${q.exp}`;
+
+                quizCurrentIndex++;
+                setTimeout(loadQuizQuestion, 1800);
+            } else {
+                playSound('wrong');
+                quizLives--;
+                userStreak = 0;
+                document.getElementById('user-streak').innerText = `0 Стрик`;
+                updateLivesUI();
+
+                feedback.className = "p-4 rounded-2xl font-bold text-sm text-center bg-rose-900/60 border border-rose-500 text-rose-300";
+                feedback.innerText = `Қате! ❌ Қайтадан ойланып көріңіз. ${q.exp}`;
+
+                if (quizLives <= 0) {
+                    setTimeout(() => {
+                        alert("Ойын аяқталды! Қайтадан байқап көріңіз.");
+                        resetQuizGame();
+                    }, 1000);
+                }
+            }
+        }
+
+        function updateLivesUI() {
+            const container = document.getElementById('quiz-lives');
+            container.innerHTML = "";
+            for (let i = 0; i < 3; i++) {
+                if (i < quizLives) {
+                    container.innerHTML += `<i class="fa-solid fa-heart"></i>`;
+                } else {
+                    container.innerHTML += `<i class="fa-regular fa-heart text-slate-600"></i>`;
+                }
+            }
+        }
+
+        function resetQuizGame() {
+            quizCurrentIndex = 0;
+            quizScore = 0;
+            quizLives = 3;
+            document.getElementById('quiz-score').innerText = 0;
+            updateLivesUI();
+            loadQuizQuestion();
+        }
+
+        // Matching Memory Game Logic
+        const matchPairs = [
+            { id: 1, text: "2⁴" }, { id: 1, text: "16" },
+            { id: 2, text: "(a³)²" }, { id: 2, text: "a⁶" },
+            { id: 3, text: "5⁰" }, { id: 3, text: "1" },
+            { id: 4, text: "x⁷ : x⁴" }, { id: 4, text: "x³" }
+        ];
+
+        let selectedMatchCard = null;
+        let matchedCount = 0;
+
+        function initMatchGame() {
+            matchedCount = 0;
+            selectedMatchCard = null;
+            const grid = document.getElementById('match-cards-grid');
+            grid.innerHTML = "";
+
+            // Shuffle pairs
+            const shuffled = [...matchPairs].sort(() => Math.random() - 0.5);
+
+            shuffled.forEach((item, index) => {
+                const card = document.createElement('button');
+                card.className = "p-6 rounded-2xl bg-space-800 border border-slate-700 font-bold font-mono text-xl hover:border-brand-cyan transition text-center shadow-lg";
+                card.innerText = item.text;
+                card.dataset.pairId = item.id;
+                card.onclick = () => handleMatchSelect(card);
+                grid.appendChild(card);
+            });
+        }
+
+        function handleMatchSelect(card) {
+            if (card.classList.contains('bg-emerald-900/60')) return; // Already matched
+
+            if (!selectedMatchCard) {
+                selectedMatchCard = card;
+                card.classList.add('border-brand-yellow', 'bg-space-700');
+            } else if (selectedMatchCard === card) {
+                selectedMatchCard.classList.remove('border-brand-yellow', 'bg-space-700');
+                selectedMatchCard = null;
+            } else {
+                // Check Match
+                if (selectedMatchCard.dataset.pairId === card.dataset.pairId) {
+                    playSound('correct');
+                    selectedMatchCard.className = "p-6 rounded-2xl bg-emerald-900/60 border border-emerald-500 font-bold font-mono text-xl text-emerald-300 text-center";
+                    card.className = "p-6 rounded-2xl bg-emerald-900/60 border border-emerald-500 font-bold font-mono text-xl text-emerald-300 text-center";
+                    selectedMatchCard = null;
+                    matchedCount += 2;
+                    addXP(10);
+
+                    if (matchedCount === matchPairs.length) {
+                        setTimeout(() => {
+                            alert("Керемет! Барлық жұптар дұрыс табылды! +25 XP");
+                            addXP(25);
+                        }, 300);
+                    }
+                } else {
+                    playSound('wrong');
+                    card.classList.add('border-rose-500');
+                    selectedMatchCard.classList.add('border-rose-500');
+                    setTimeout(() => {
+                        if (selectedMatchCard) {
+                            selectedMatchCard.classList.remove('border-brand-yellow', 'bg-space-700', 'border-rose-500');
+                        }
+                        card.classList.remove('border-rose-500');
+                        selectedMatchCard = null;
+                    }, 800);
+                }
+            }
+        }
+
+        // Detective Mistake Finder Logic
+        const detectiveQuestions = [
+            { expr: "(x³)⁴ = x⁷", isMistake: true, exp: "Қате! Дәрежені дәрежелегенде көрсеткіштер көбейтіледі: 3 · 4 = 12 (x¹² болуы керек)." },
+            { expr: "a⁵ · a³ = a⁸", isMistake: false, exp: "Дұрыс! Негіздері бірдей дәрежелерді көбейткенде көрсеткіштер қосылады: 5 + 3 = 8." },
+            { expr: "(-2)⁴ = -16", isMistake: true, exp: "Қате! Теріс санның ЖҰП дәрежесі әрқашан оң сан болады: +16." }
+        ];
+
+        let detectiveIndex = 0;
+
+        function loadDetectiveQuestion() {
+            if (detectiveIndex >= detectiveQuestions.length) detectiveIndex = 0;
+            const q = detectiveQuestions[detectiveIndex];
+            document.getElementById('detective-expr').innerText = q.expr;
+            document.getElementById('detective-feedback').className = "hidden";
+        }
+
+        function checkDetectiveAnswer(userSaysMistake) {
+            const q = detectiveQuestions[detectiveIndex];
+            const feedback = document.getElementById('detective-feedback');
+            feedback.classList.remove('hidden');
+
+            if (userSaysMistake === q.isMistake) {
+                playSound('correct');
+                feedback.className = "p-4 rounded-xl text-sm font-semibold bg-emerald-900/60 border border-emerald-500 text-emerald-300";
+                feedback.innerText = `Өте қырағысыз! 👏 ${q.exp}`;
+                addXP(15);
+                detectiveIndex++;
+                setTimeout(loadDetectiveQuestion, 2000);
+            } else {
+                playSound('wrong');
+                feedback.className = "p-4 rounded-xl text-sm font-semibold bg-rose-900/60 border border-rose-500 text-rose-300";
+                feedback.innerText = `Қателестіңіз. 🧐 ${q.exp}`;
+            }
+        }
+
+        function switchGameMode(mode) {
+            document.getElementById('game-quiz-container').classList.add('hidden');
+            document.getElementById('game-match-container').classList.add('hidden');
+            document.getElementById('game-detective-container').classList.add('hidden');
+
+            document.getElementById('tab-game-quiz').className = "px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+            document.getElementById('tab-game-match').className = "px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+            document.getElementById('tab-game-detective').className = "px-4 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white";
+
+            if (mode === 'quiz') {
+                document.getElementById('game-quiz-container').classList.remove('hidden');
+                document.getElementById('tab-game-quiz').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-purple text-white";
+            } else if (mode === 'match') {
+                document.getElementById('game-match-container').classList.remove('hidden');
+                document.getElementById('tab-game-match').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-cyan text-white";
+                initMatchGame();
+            } else if (mode === 'detective') {
+                document.getElementById('game-detective-container').classList.remove('hidden');
+                document.getElementById('tab-game-detective').className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-pink text-white";
+                loadDetectiveQuestion();
+            }
+        }
+
+        function calculatePowerStep() {
+            const base = parseInt(document.getElementById('calc-base').value) || 0;
+            const exp = parseInt(document.getElementById('calc-exp').value) || 0;
+
+            let result = Math.pow(base, exp);
+            let steps = "";
+
+            if (exp === 0) {
+                steps = `${base}⁰ = 1 (Нөлдік дәреженің анықтамасы бойынша)`;
+            } else if (exp === 1) {
+                steps = `${base}¹ = ${base}`;
+            } else {
+                const arr = Array(exp).fill(base);
+                steps = `${base}<sup>${exp}</sup> = ${arr.join(" × ")} = ${result}`;
+            }
+
+            document.getElementById('calc-steps').innerHTML = steps;
+        }
+
+        window.onload = function() {
+            updateSimulator();
+            selectProperty(0);
+            loadQuizQuestion();
+        }
+    </script>
+</body>
+</html>
